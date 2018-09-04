@@ -2,6 +2,6 @@ function renderCloud(ctx) {
 
 }
 
-window.renderStatistics(ctx, names, times) {
+window.renderStatistics = function (ctx, names, times){
 
 }
