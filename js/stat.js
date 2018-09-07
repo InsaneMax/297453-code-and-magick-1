@@ -5,7 +5,6 @@ var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var GAP = 10;
-var FONT_GAP = 15;
 var BAR_GAP = 50;
 var BAR_WIDTH = 40;
 var BAR_HEIGHT = 150;
@@ -31,11 +30,13 @@ function renderCloud(ctx, x, y, color) {
   ctx.fillRect(x - GAP, y - GAP, CLOUD_WIDTH, CLOUD_HEIGHT);
 }
 
-function renderText(ctx, font, color, text1, text2) {
-  ctx.font = font;
+function renderText(ctx, fontSize, color, texts) {
+  ctx.font = fontSize + 'px PT Mono';
   ctx.fillStyle = color;
-  ctx.fillText(text1, CLOUD_X + GAP * 4, CLOUD_Y + GAP * 2);
-  ctx.fillText(text2, CLOUD_X + GAP * 4, CLOUD_Y + FONT_GAP + GAP * 3);
+  for (var i = 0; i < texts.length; i++) {
+    var offsetY = (i + 2) * 15;
+    ctx.fillText(texts[i], CLOUD_X + GAP * 4, CLOUD_Y + offsetY);
+  }
 }
 
 function renderColumn(ctx, name, time, x, y, height) {
@@ -51,7 +52,7 @@ window.renderStatistics = function (ctx, names, times) {
   var maxValue = getMaxOfArray(times);
 
   renderCloud(ctx, CLOUD_X, CLOUD_Y, 'rgba(0, 0, 0, 0.7)');
-  renderText(ctx, '16px PT Mono', '#000000', 'Ура вы победили!', 'Список результатов:');
+  renderText(ctx, 16, '#000000', ['Ура вы победили!', 'Список результатов:']);
 
   for (var i = 0; i < names.length; i++) {
     var x = CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i;
